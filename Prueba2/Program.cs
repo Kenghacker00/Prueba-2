@@ -45,41 +45,58 @@ class Program
                 int aprobados = 0;
                 int reprobados = 0;
                 bool continuar;
+
                 do
                 {
-                    Console.WriteLine("Ingrese el nombre del estudiante: ");
-                    alumno.Nombre = Console.ReadLine();
+                    do
+                    {
+                        Console.WriteLine("Ingrese el nombre del estudiante: ");
+                        alumno.Nombre = Console.ReadLine();
+                        Console.WriteLine("Ingrese la nota acumulada entre 0 y 100: ");
+                        alumno.NotaAcumulada = double.Parse(Console.ReadLine());
+                        if (alumno.NotaAcumulada < 0 || alumno.NotaAcumulada > 100)
+                        {
+                            Console.WriteLine("Nota incorrecta");
+                        }
 
-                    Console.WriteLine("Digite la nota acumulada: ");
-                    alumno.NotaAcumulada = double.Parse(Console.ReadLine());
+                    } while (alumno.NotaAcumulada < 0 || alumno.NotaAcumulada > 100);
 
-                    Console.WriteLine("Digite la nota del examen: ");
-                    alumno.NotaExamen = double.Parse(Console.ReadLine());
+                    do
+                    {
+                        Console.WriteLine("Ingrese la nota del examen entre 0 y 100: ");
+                        alumno.NotaExamen = double.Parse(Console.ReadLine());
+                        if (alumno.NotaExamen < 0 || alumno.NotaExamen > 100)
+                        {
+                            Console.WriteLine("Nota incorrecta");
+                        }
+
+                    } while (alumno.NotaExamen < 0 || alumno.NotaExamen > 100);
                     alumno.MostrarDatos();
+
                     if (alumno.CalcularNotaFinal() >= 60 && alumno.CalcularNotaFinal() <= 100)
                     {
                         aprobados++;
                     }
-                    else if (alumno.CalcularNotaFinal() < 60)
+                    else if (alumno.CalcularNotaFinal() > 100)
+                    {
+                        Console.WriteLine("El estudiante supero el limite de nota, por lo que su calificacion es de 100");
+                        aprobados++;
+                    }
+                    else
                     {
                         reprobados++;
                     }
 
-                    Console.WriteLine("Desea ingresar otro alumno? ");
-                    if (Console.ReadLine().ToLower() == "si")
+                    Console.WriteLine("Desea ingresar otro alumno? (si/no): ");
+                    continuar = Console.ReadLine().ToLower() == "si";
+
+                    if (!continuar)
                     {
-                        continuar = true;
-                    }
-                    else
-                    {
-                        continuar = false;
                         Console.WriteLine($"Reprobados: {reprobados}");
                         Console.WriteLine($"Aprobados: {aprobados}");
                     }
-
-
                 } while (continuar);
-
+                
                 break;
 
             case 3:

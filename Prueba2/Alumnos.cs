@@ -33,19 +33,15 @@ namespace Prueba2
 
         public void MostrarDatos()
         {
-            Console.WriteLine($"Nombre del estudiante {Nombre}");
+            Console.WriteLine($"Nombre del estudiante: {Nombre}");
             Console.WriteLine($"Nota final: {CalcularNotaFinal()}");
-            if (CalcularNotaFinal() >= 60 && CalcularNotaFinal() <= 100)
+            if (CalcularNotaFinal() >= 60 && CalcularNotaFinal() >= 100)
             {
                 Console.WriteLine("Aprobado, felicidades");
             }
-            else if (CalcularNotaFinal() < 60)
-            {
-                Console.WriteLine("Mala noticia, reprobado");
-            }
             else
             {
-                Console.WriteLine("Nota incorrecta");
+                Console.WriteLine("Mala noticia, estas reprobado");
             }
         }
 
